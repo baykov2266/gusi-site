@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Два веселых гуся - Коттеджный комплекс</title>
+    <style>
+        :root {
+            --primary: #253342;
+            --accent: #D4A373;
+            --accent-warm: #E6B98A;
+            --bg-light: #F7F4EE;
+            --bg-card: #FFFFFF;
+            --text-dark: #2B2B2B;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --warm-glow: rgba(212, 163, 115, 0.18);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигация / Шапка */
+        header {
+            background-color: rgba(247, 244, 238, 0.95);
+            border-bottom: 1px solid #E3DCD0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            padding: 12px 0;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 8px 25px rgba(37,51,66,0.08);
+            padding: 10px 0;
+            background: rgba(247, 244, 238, 0.98);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icons {
+            display: flex;
+            gap: 4px;
+            font-size: 1.4rem;
+        }
+
+        .nav-logo-text-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-logo-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .nav-logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-links a::after {
+            content: ''; position: absolute; left: 0; bottom: -3px; width: 100%; height: 2px;
+            background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1); transform-origin: left;
+        }
+
+        .nav-phones-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .nav-phone {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s, transform 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-phone:hover {
+            color: var(--accent);
+            transform: scale(1.03);
+        }
+
+        /* Бургер-кнопка для мобильных */
+        .burger-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        @media(max-width: 950px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid #E3DCD0;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                gap: 15px;
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                font-size: 1rem;
+            }
+            .burger-btn {
+                display: block;
+            }
+            .nav-phones-block {
+                display: none;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(37, 51, 66, 0.65), rgba(37, 51, 66, 0.75)), url('photo_2026-10-19_23-09-02.jpg') center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 110px 20px;
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60px;
+            background: linear-gradient(to top, var(--bg-light), transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 35px;
+            opacity: 0.95;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 16px 32px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #B58555;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 163, 115, 0.45);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.3rem;
+            margin: 70px 0 45px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        @media(max-width: 768px) {
+            .section-title { font-size: 1.8rem; margin: 50px 0 30px; }
+        }
+
+        /* Houses Section */
+        .houses-section {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+
+        .houses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.06);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #E8E2D5;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 35px rgba(212, 163, 115, 0.18);
+            border-color: var(--accent);
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .slide {
+            transform: scale(1.03);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.45);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .slider-btn:hover { background-color: var(--accent); transform: translateY(-50%) scale(1.1); }
+        .prev-btn { left: 12px; }
+        .next-btn { right: 12px; }
+        
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dot.active { background-color: white; width: 22px; border-radius: 4px; }
+
+        .card-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .features-grid-top {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid #E8E2D5;
+            background: var(--bg-light);
+            margin-top: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        @media(max-width: 768px) {
+            .features-grid-top { grid-template-columns: 1fr; }
+        }
+
+        .feature-cell {
+            padding: 22px;
+            border-right: 1px solid #E8E2D5;
+            border-bottom: 1px solid #E8E2D5;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            transition: background 0.3s;
+        }
+
+        .feature-cell:hover {
+            background: var(--white);
+        }
+
+        .feature-cell-num {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 6px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        /* Что уже есть в доме */
+        .amenities-list-section {
+            padding: 70px 0;
+            background-color: var(--bg-light);
+        }
+
+        .amenities-list-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media(max-width: 900px) {
+            .amenities-list-layout { grid-template-columns: 1fr; }
+        }
+
+        .amenities-items-list {
+            list-style: none;
+            background: var(--white);
+            padding: 35px;
+            border: 1px solid #E8E2D5;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .amenities-item {
+            padding: 13px 0;
+            border-bottom: 1px solid #F0ECE4;
+            font-size: 1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .amenities-item:hover {
+            transform: translateX(6px);
+            color: var(--accent);
+        }
+
+        .amenities-item::before {
+            content: "—";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .amenities-photos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .amenity-photo-box {
+            height: 210px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+        }
+
+        .amenity-photo-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(212, 163, 115, 0.25);
+        }
+
+        /* Келколовский карьер */
+        .career-section {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 75px 0;
+        }
+
+        .career-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        @media(max-width: 900px) {
+            .career-layout { grid-template-columns: 1fr; }
+        }
+
+        .career-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .career-badge {
+            border: 1px solid rgba(212, 163, 115, 0.4);
+            padding: 7px 16px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.03);
+            color: var(--white);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .career-badge:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .career-gallery {
+            display: grid;
+            grid-template-columns: 2fr 2fr;
+            gap: 16px;
+        }
+
+        .career-img-big {
+            grid-column: 1 / -1;
+            height: 260px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 6px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: transform 0.4s;
+        }
+
+        .career-img-big:hover { transform: scale(1.02); }
+
+        .career-img-small {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 6px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transition: transform 0.4s;
+        }
+
+        .career-img-small:hover { transform: translateY(-4px); }
+
+        .career-img-caption {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        /* Дополнительные услуги */
+        .services-section {
+            padding: 75px 0;
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-light);
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #E8E2D5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            background: var(--white);
+            box-shadow: 0 16px 35px rgba(212, 163, 115, 0.18);
+            border-color: var(--accent);
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+        }
+
+        .service-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-top: 18px;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-price {
+            transform: scale(1.08);
+        }
+
+        /* Калькулятор */
+        .calc-section-new {
+            padding: 75px 0;
+            background-color: var(--bg-light);
+        }
+
+        .calc-header {
+            margin-bottom: 45px;
+            border-bottom: 1px solid #E8E2D5;
+            padding-bottom: 25px;
+        }
+
+        .calc-step {
+            font-size: 0.95rem;
+            color: var(--accent);
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .calc-heading {
+            font-size: 2.6rem;
+            color: var(--primary);
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .calc-subtext {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .calc-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--white);
+            border: 1px solid #E8E2D5;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(44,62,80,0.05);
+            transition: box-shadow 0.4s;
+        }
+
+        .calc-layout:hover {
+            box-shadow: 0 20px 45px rgba(212, 163, 115, 0.15);
+        }
+
+        @media(max-width: 900px) {
+            .calc-layout { grid-template-columns: 1fr; }
+        }
+
+        .calc-left-pane {
+            padding: 45px;
+            border-right: 1px solid #E8E2D5;
+        }
+
+        @media(max-width: 900px) {
+            .calc-left-pane { border-right: none; border-bottom: 1px solid #E8E2D5; }
+        }
+
+        .calc-right-pane {
+            padding: 45px;
+            background-color: #FAF7F0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .calc-row-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .house-switcher {
+            display: flex;
+            gap: 0;
+            margin-bottom: 30px;
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            overflow: hidden;
+            width: fit-content;
+        }
+
+        .house-switch-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 28px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .house-switch-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .house-switch-btn:hover:not(.active) { background: rgba(37, 51, 66, 0.08); }
+
+        .guests-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .guest-btn {
+            width: 44px;
+            height: 44px;
+            border: 1px solid #E8E2D5;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.25s;
+            color: var(--text-dark);
+        }
+
+        .guest-btn:hover:not(.active) {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .guest-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.06);
+        }
+
+        .calc-inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #E8E2D5;
+        }
+
+        @media(max-width: 600px) {
+            .calc-inputs-grid { grid-template-columns: 1fr; }
+        }
+
+        .input-box label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #E8E2D5;
+            background: var(--white);
+            font-size: 1rem;
+            color: var(--text-dark);
+            border-radius: 6px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .input-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--warm-glow);
+        }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid #E8E2D5;
+            background: var(--white);
+            height: 48px;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .counter-controls:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 12px var(--warm-glow);
+        }
+
+        .counter-btn {
+            background: transparent;
+            border: none;
+            width: 45px;
+            height: 100%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .counter-btn:hover { background: #F0EBE1; }
+        .counter-btn:active { transform: scale(0.85); }
+
+        .counter-value {
+            flex-grow: 1;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .addons-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Right Pane */
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .summary-days-list {
+            list-style: none;
+            margin-bottom: 30px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .summary-day-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 11px 0;
+            border-bottom: 1px solid #EFE9DE;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            transition: background 0.3s;
+        }
+
+        .summary-day-item:hover { background: rgba(212, 163, 115, 0.08); padding-left: 5px; padding-right: 5px; }
+
+        .summary-day-item span:last-child {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .summary-total-block {
+            border-top: 2px solid var(--primary);
+            padding-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .summary-total-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .summary-total-price {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            transform-origin: left center;
+        }
+
+        .summary-notes {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .book-calc-btn {
+            width: 100%;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
+        }
+
+        .book-calc-btn:hover { background-color: #B58555; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(212, 163, 115, 0.45); }
+
+        .calc-disclaimer {
+            margin-top: 40px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Отзывы */
+        .reviews-section {
+            padding: 85px 0;
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .reviews-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 30px;
+        }
+
+        .reviews-rating-block {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+        }
+
+        .reviews-score {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .reviews-stars-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .reviews-stars {
+            color: #F1C40F;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+
+        .reviews-count {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .reviews-ya-btn {
+            display: inline-block;
+            border: 2px solid var(--accent);
+            color: var(--white);
+            background: transparent;
+            padding: 14px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reviews-ya-btn:hover {
+            background-color: var(--accent);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(212,163,115,0.35);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        @media(max-width: 850px) {
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 32px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s ease;
+        }
+
+        .review-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-4px);
+            border-color: rgba(212, 163, 115, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .review-text {
+            font-size: 1.02rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.92);
+            margin-bottom: 20px;
+        }
+
+        .review-author {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Где мы находимся */
+        .location { padding: 60px 0; background-color: var(--bg-light); }
+        .map-container {
+            max-width: 850px;
+            height: 380px;
+            margin: 0 auto 40px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+            background-color: #e5e5e5;
+            border: 3px solid var(--white);
+        }
+        .map-container iframe { width: 100%; height: 100%; border: none; display: block; }
+
+        /* Почему выбирают нас */
+        .advantages { background-color: var(--white); padding: 75px 0; }
+        .adv-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 30px; 
+        }
+        @media(max-width: 768px) { 
+            .adv-grid { grid-template-columns: 1fr; } 
+        }
+        .adv-item:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .adv-item { 
+            padding: 25px; 
+            border-left: 4px solid var(--accent); 
+            background: var(--bg-light); 
+            border-radius: 0 10px 10px 0; 
+            transition: all 0.35s ease;
+        }
+        .adv-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 25px rgba(212, 163, 115, 0.15);
+            background: var(--white);
+        }
+        .adv-item h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.3rem; }
+        .adv-item p { color: var(--text-light); }
+
+        /* Наши контакты */
+        .contacts { padding: 60px 0; background-color: var(--bg-light); }
+        .contacts-grid { display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; margin-bottom: 30px; }
+        .contact-card { 
+            background: var(--white); 
+            padding: 35px; 
+            border-radius: 12px; 
+            text-align: center; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04); 
+            min-width: 270px; 
+            border: 1px solid #E8E2D5;
+            transition: all 0.35s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(212, 163, 115, 0.2);
+            border-color: var(--accent);
+        }
+        .contact-card h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.5rem; }
+        .contact-link { color: var(--accent); text-decoration: none; font-weight: bold; font-size: 1.15rem; display: block; margin-top: 8px; transition: color 0.3s; }
+        .contact-link:hover { color: #B58555; text-decoration: underline; }
+
+        /* Плавающая кнопка ВК с выбором получателя */
+        .floating-vk-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 998;
+        }
+
+        .floating-vk-main-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 2px solid var(--white);
+            cursor: pointer;
+        }
+
+        .floating-vk-main-btn:hover {
+            background-color: var(--accent);
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 12px 30px rgba(212,163,115,0.45);
+        }
+
+        .floating-vk-menu {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: var(--white);
+            border: 1px solid #E8E2D5;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 170px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .floating-vk-container.active .floating-vk-menu {
+            display: flex;
+        }
+
+        .floating-vk-item {
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            display: block;
+            text-align: left;
+        }
+
+        .floating-vk-item:hover {
+            background: var(--bg-light);
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer { background-color: var(--primary); color: var(--white); text-align: center; padding: 50px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        footer h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        footer a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+        footer a:hover { color: var(--white); text-decoration: underline; }
+
+        /* Модальное окно */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: var(--white);
+            padding: 45px;
+            border-radius: 14px;
+            width: 90%; max-width: 500px;
+            position: relative;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+            max-height: 90vh; overflow-y: auto;
+        }
+        .close-btn {
+            position: absolute; top: 18px; right: 22px;
+            font-size: 1.6rem; cursor: pointer; color: var(--text-light);
+            transition: transform 0.3s, color 0.3s;
+        }
+        .close-btn:hover { color: var(--text-dark); transform: rotate(90deg); }
+        .modal-content h2 { margin-bottom: 25px; color: var(--primary); text-align: center; font-size: 1.8rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9rem; color: var(--primary); }
+        .form-group input[type="text"], .form-group input[type="tel"], .form-group input[type="date"] {
+            width: 100%; padding: 12px 15px; border: 1px solid #E8E2D5; border-radius: 6px; font-family: inherit; font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--warm-glow);
+        }
+        .form-checkbox { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; cursor: pointer; font-size: 0.95rem; }
+        .form-checkbox input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
+        .submit-btn { width: 100%; font-size: 1.1rem; padding: 14px; }
+
+        /* ============ АНИМАЦИИ И ДИНАМИКА ============ */
+        @keyframes revealUp { from { opacity: 0; transform: translateY(35px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeDown { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes heroIn { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes heroPan { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+        @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes popAnim { 0% { transform: scale(1); } 50% { transform: scale(1.12); } 100% { transform: scale(1); } }
+        @keyframes itemIn { from { opacity: 0; transform: translateX(-15px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes shine { 0% { left: -75%; } 55%, 100% { left: 130%; } }
+        @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(212,163,115,0.5); } 70% { box-shadow: 0 0 0 16px rgba(212,163,115,0); } }
+        @keyframes rippleAnim { from { transform: scale(0); opacity: 0.4; } to { transform: scale(4.5); opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalPop { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes pricePop { 0% { transform: scale(1); } 40% { transform: scale(1.08); } 100% { transform: scale(1); } }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .js-reveal:not(.in-view) { opacity: 0; transform: translateY(35px); }
+        .js-reveal.in-view { 
+            animation: revealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) forwards; 
+        }
+
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; width: 100%; height: 3.5px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+            transform: scaleX(0); transform-origin: left;
+            z-index: 1001; pointer-events: none;
+            box-shadow: 0 0 12px var(--accent);
+        }
+
+        header { animation: fadeDown 0.7s ease backwards; }
+        header.scrolled { box-shadow: 0 8px 25px rgba(37,51,66,0.08); padding: 10px 0; background: rgba(247, 244, 238, 0.96); }
+
+        .hero { animation: heroPan 35s ease-in-out infinite alternate; }
+        .hero h1 { animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards; }
+        .hero p { animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s backwards; }
+        .hero .btn { animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards, glowPulse 3s ease-in-out 1.5s infinite; }
+
+        .btn, .book-calc-btn, .review-link-btn, .reviews-ya-btn, .house-switch-btn, .guest-btn, .counter-btn { position: relative; overflow: hidden; }
+        .btn::before, .book-calc-btn::before, .reviews-ya-btn::before {
+            content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg); animation: shine 5s ease-in-out infinite; pointer-events: none;
+        }
+        .ripple { position: absolute; border-radius: 50%; background: currentColor; pointer-events: none; animation: rippleAnim 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .section-title::after {
+            content: ''; display: block; width: 0; height: 3px; background: var(--accent);
+            margin: 14px auto 0; border-radius: 2px; transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+        .section-title.in-view::after { width: 90px; }
+
+        .career-badge { animation: floatY 4s ease-in-out infinite; }
+        .career-badge:nth-child(2) { animation-delay: 0.4s; }
+        .career-badge:nth-child(3) { animation-delay: 0.8s; }
+        .career-badge:nth-child(4) { animation-delay: 1.2s; }
+        .career-badge:nth-child(5) { animation-delay: 1.6s; }
+        .career-badge:nth-child(6) { animation-delay: 2.0s; }
+
+        .house-switch-btn.active, .guest-btn.active { animation: popAnim 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+        .counter-value.bump { animation: popAnim 0.3s ease; }
+        .summary-day-item { animation: itemIn 0.4s ease backwards; }
+        .summary-total-price.price-pop { animation: pricePop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        .modal-overlay.active { animation: fadeIn 0.3s ease; }
+        .modal-overlay.active .modal-content { animation: modalPop 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация / Шапка -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="nav-logo-area">
+                <div class="nav-logo-icons"><span>🦆</span><span>🦆</span></div>
+                <div class="nav-logo-text-block">
+                    <span class="nav-logo-title">Два весёлых гуся</span>
+                    <span class="nav-logo-subtitle">коттеджный комплекс</span>
+                </div>
+            </a>
+            <button class="burger-btn" id="burgerToggle" aria-label="Меню">☰</button>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#calculator">Цена</a></li>
+                    <li><a href="#houses">Дома</a></li>
+                    <li><a href="#career">Карьер</a></li>
+                    <li><a href="#services">Баня и сап</a></li>
+                    <li><a href="#calculator">Бронь</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="nav-phones-block">
+                <a href="tel:+79213712906" class="nav-phone">+7 (921) 371-29-06 (Настя)</a>
+                <a href="tel:+79112399635" class="nav-phone">+7 (911) 239-96-35 (Никита)</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Коттеджный комплекс «Два веселых гуся»</h1>
+            <p>Два уютных дома в стиле барнхаус с видом на сосновый лес. В 3-х минутах ходьбы от Келколовского карьера. Голубой карьер, песчаные пляжи, чистый воздух — отдохните от городской суеты.</p>
+            <a href="#houses" class="btn">Смотреть домики</a>
+        </div>
+    </section>
+
+    <!-- 1. ДВА ДОМА -->
+    <section class="houses-section" id="houses">
+        <div class="container">
+            <h2 class="section-title">Два дома — одинаковые по плану, разные по характеру</h2>
+            
+            <div class="houses-grid">
+                <div class="card">
+                    <div class="slider-container" id="slider1">
+                        <div class="slider-wrapper">
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-33-35.jpg');"></div>
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-37-25.jpg');"></div>
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-37-34.jpg');"></div>
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-37-42.jpg');"></div>
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-37-46.jpg');"></div>
+                        </div>
+                        <button class="slider-btn prev-btn">&#10094;</button>
+                        <button class="slider-btn next-btn">&#10095;</button>
+                        <div class="slider-dots">
+                            <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Белый гусь</h3>
+                        <p>Уютный коттедж со всеми удобствами, отдельным заездом, мангальной зоной и террасой. Идеален для комфортного отдыха на природе.</p>
+                        <br>
+                        <button class="btn open-modal-btn" data-house="Белый гусь" style="padding: 10px 20px; font-size: 0.9rem;">Забронировать</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="slider-container" id="slider2">
+                        <div class="slider-wrapper">
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-08-10.jpg');"></div>
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-40-51.jpg');"></div>
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-41-19.jpg');"></div>
+                            <div class="slide" style="background-image: url('photo_2026-10-19_23-41-27.jpg');"></div>
+                        </div>
+                        <button class="slider-btn prev-btn">&#10094;</button>
+                        <button class="slider-btn next-btn">&#10095;</button>
+                        <div class="slider-dots">
+                            <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Серый гусь</h3>
+                        <p>Просторный дом с панорамными окнами и видом на лес. Уединение и покой без соседей, своя калитка и парковка.</p>
+                        <br>
+                        <button class="btn open-modal-btn" data-house="Серый гусь" style="padding: 10px 20px; font-size: 0.9rem;">Забронировать</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid-top">
+                <div class="feature-cell"><span class="feature-cell-num"></span>120 м², один этаж</div>
+                <div class="feature-cell"><span class="feature-cell-num"></span>3 спальни: двуспальная кровать и раскладной диван · двуспальная · две односпальные</div>
+                <div class="feature-cell"><span class="feature-cell-num"></span>Кухня-гостиная 32 м² с панорамными окнами и террасой</div>
+                <div class="feature-cell"><span class="feature-cell-num"></span>Ванная с туалетом и тропическим душем</div>
+                <div class="feature-cell"><span class="feature-cell-num"></span>6 основных мест + 3 дополнительных</div>
+                <div class="feature-cell"><span class="feature-cell-num"></span>Свой заезд и парковка на 3–4 машины</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Что уже есть в доме -->
+    <section class="amenities-list-section" id="amenities-in-house">
+        <div class="container">
+            <h2 class="section-title">Что уже есть в доме</h2>
+            <div class="amenities-list-layout">
+                <ul class="amenities-items-list">
+                    <li class="amenities-item">Tёплые полы</li>
+                    <li class="amenities-item">Большая мангальная зона: шампуры, решётка</li>
+                    <li class="amenities-item">Питьевая вода — система осмоса</li>
+                    <li class="amenities-item">Wi-Fi на всей территории</li>
+                    <li class="amenities-item">Телевизор с интернетом</li>
+                    <li class="amenities-item">Портативная колонка</li>
+                    <li class="amenities-item">Настольные игры для компании</li>
+                    <li class="amenities-item">Посудомоечная машина</li>
+                    <li class="amenities-item">Холодильник, газовая плита, микроволновка</li>
+                    <li class="amenities-item">Посуда и кухонная утварь</li>
+                    <li class="amenities-item">Постельное бельё, полотенца, средства гигиены</li>
+                    <li class="amenities-item">Фен</li>
+                    <li class="amenities-item">Детский стульчик и манеж — по запросу</li>
+                    <li class="amenities-item">Круглосуточное видеонаблюдение</li>
+                </ul>
+                <div class="amenities-photos-grid">
+                    <div class="amenity-photo-box" style="background-image: url('photo_2026-10-19_23-38-09.jpg');"></div>
+                    <div class="amenity-photo-box" style="background-image: url('photo_2026-10-19_23-38-15.jpg');"></div>
+                    <div class="amenity-photo-box" style="background-image: url('photo_2026-10-19_23-38-40.jpg');"></div>
+                    <div class="amenity-photo-box" style="background-image: url('photo_2026-10-19_23-38-45.jpg');"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Келколовский карьер -->
+    <section class="career-section" id="career">
+        <div class="container">
+            <div class="career-layout">
+                <div>
+                    <span style="font-size: 0.9rem; color: var(--accent); font-weight: bold; letter-spacing: 2px; display: block; margin-bottom: 5px;">03</span>
+                    <h2 style="font-size: 2.3rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; line-height: 1.2;">
+                        Келколовский карьер — три минуты пешком
+                    </h2>
+                    <p style="font-size: 1.05rem; opacity: 0.95; line-height: 1.7; margin-bottom: 25px;">
+                        Голубой карьер, песчаные пляжи, сосновый лес вокруг. Летом — купаться, рыбачить и плавать на сапах, у главного пляжа сетка для волейбола. Осенью — грибы и облепиха. Зимой — ватрушки, лыжи и заснеженный лес.
+                    </p>
+                    <div class="career-badges">
+                        <span class="career-badge">Рыбалка</span>
+                        <span class="career-badge">Сап-доски</span>
+                        <span class="career-badge">Песчаный пляж и волейбол</span>
+                        <span class="career-badge">Грибы в лесу</span>
+                        <span class="career-badge">Ватрушки и лыжи зимой</span>
+                        <span class="career-badge">Закат на террасе</span>
+                    </div>
+                </div>
+                <div class="career-gallery">
+                    <div class="career-img-big" style="background-image: url('photo_2026-10-19_23-09-02.jpg');"></div>
+                    <div>
+                        <div class="career-img-small" style="background-image: url('photo_2026-10-20_20-49-42.jpg');"></div>
+                        <div class="career-img-caption">утро, туман над водой</div>
+                    </div>
+                    <div>
+                        <div class="career-img-small" style="background-image: url('photo_2026-10-20_20-49-40.jpg');"></div>
+                        <div class="career-img-caption">осень</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Дополнительные услуги -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2 class="section-title">Дополнительные услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Баня</h3>
+                    <p>Настоящая баня для полного расслабления на природе.</p>
+                    <div class="service-price">5 000 ₽</div>
+                </div>
+                <div class="service-card">
+                    <h3>Казан</h3>
+                    <p>Для приготовления вкуснейших блюд на открытом огне.</p>
+                    <div class="service-price">1 000 ₽</div>
+                </div>
+                <div class="service-card">
+                    <h3>SUP-серфинг</h3>
+                    <p>Аренда сапбордов для активного отдыха на карьере.</p>
+                    <div class="service-price">500 ₽</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Калькулятор -->
+    <section class="calc-section-new" id="calculator">
+        <div class="container">
+            <div class="calc-header">
+                <span class="calc-step">01</span>
+                <h2 class="calc-heading">Сколько гостей приедет?</h2>
+                <p class="calc-subtext">Выберите дом, количество гостей, даты заезда и дополнительные опции — рассчитаем стоимость за пару кликов.</p>
+            </div>
+
+            <div class="calc-layout">
+                <div class="calc-left-pane">
+                    <div class="calc-row-title">Дом</div>
+                    <div class="house-switcher">
+                        <button type="button" class="house-switch-btn active" data-house="Белый гусь">Белый гусь</button>
+                        <button type="button" class="house-switch-btn" data-house="Серый гусь">Серый гусь</button>
+                    </div>
+
+                    <div class="calc-row-title">Сколько вас (<span id="guests-count-label">6</span> гостей)</div>
+                    <div class="guests-selector" id="guests-selector">
+                        <div class="guest-btn active" data-guests="1">1</div>
+                        <div class="guest-btn" data-guests="2">2</div>
+                        <div class="guest-btn" data-guests="3">3</div>
+                        <div class="guest-btn" data-guests="4">4</div>
+                        <div class="guest-btn" data-guests="5">5</div>
+                        <div class="guest-btn" data-guests="6">6</div>
+                        <div class="guest-btn" data-guests="7">7</div>
+                        <div class="guest-btn" data-guests="8">8</div>
+                        <div class="guest-btn" data-guests="9">9</div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 25px;">
+                        — основные места (до 6 гостей), --- дополнительные (+1 500 ₽ за гостя в сутки при размещении свыше 6)
+                    </div>
+
+                    <div class="calc-inputs-grid">
+                        <div class="input-box">
+                            <label for="calc-date-in">Заезд</label>
+                            <input type="date" id="calc-date-in">
+                        </div>
+                        <div class="input-box">
+                            <label>Ночей</label>
+                            <div class="counter-controls">
+                                <button type="button" class="counter-btn" id="nights-minus">−</button>
+                                <div class="counter-value" id="nights-value">2</div>
+                                <button type="button" class="counter-btn" id="nights-plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                        <div class="input-box">
+                            <label for="calc-banya">Баня, часов</label>
+                            <div class="counter-controls">
+                                <button type="button" class="counter-btn" id="banya-minus">−</button>
+                                <div class="counter-value" id="banya-value">0</div>
+                                <button type="button" class="counter-btn" id="banya-plus">+</button>
+                            </div>
+                        </div>
+                        <div class="input-box">
+                            <label for="calc-sup">Сап, часов</label>
+                            <div class="counter-controls">
+                                <button type="button" class="counter-btn" id="sup-minus">−</button>
+                                <div class="counter-value" id="sup-value">0</div>
+                                <button type="button" class="counter-btn" id="sup-plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="addons-row">
+                        <div class="input-box" style="width: calc(50% - 10px);">
+                            <label>Казан, суток</label>
+                            <div class="counter-controls">
+                                <button type="button" class="counter-btn" id="kazan-minus">−</button>
+                                <div class="counter-value" id="kazan-value">0</div>
+                                <button type="button" class="counter-btn" id="kazan-plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-right-pane">
+                    <div>
+                        <div class="summary-title" id="summary-house-title">Белый гусь · 6 гостей</div>
+                        <ul class="summary-days-list" id="summary-days-list"></ul>
+                    </div>
+
+                    <div>
+                        <div class="summary-total-block">
+                            <div class="summary-total-label">Итого</div>
+                            <div class="summary-total-price" id="calc-total-price">36 000 ₽</div>
+                        </div>
+                        <div class="summary-notes">
+                            Заезд с 14:00, выезд до 12:00.<br>
+                            Предоплата 15%. Залог 10 000 ₽ — вернём после выезда.
+                        </div>
+                        <button type="button" class="book-calc-btn open-modal-btn" id="book-calc-trigger" data-house="Белый гусь">Забронировать эти даты</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calc-disclaimer">
+                Цены актуальны на текущий сезон. Выходные — ночи с пятницы на субботу и с субботы на воскресенье. На праздники цена может отличаться — напишите, скажем точно. Дети до 4 лет — бесплатно.
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Отзывы -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <div class="reviews-top-bar">
+                <div class="reviews-rating-block">
+                    <span class="reviews-score">5,0</span>
+                    <div class="reviews-stars-meta">
+                        <div class="reviews-stars">★★★★★</div>
+                        <span class="reviews-count">64 оценки на Яндекс Картах</span>
+                    </div>
+                </div>
+                <a href="https://yandex.ru/maps/org/dva_vesyolykh_gusya/66471489988/?yclid=" target="_blank" class="reviews-ya-btn">Все отзывы на Яндекс Картах</a>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p class="review-text">Отдыхали с семьей в одном из домов 4 ночи. То, что нужно, чтобы успеть насладиться красотами вокруг, надышаться чистым воздухом, искупаться и порыбачить в карьере, и посетить баню) еще можно взять в аренду сапы) Дома новые, все необходимое, посуды в предостаточном количестве! Минусов не нашли, да и не искали 😊 Очень приятные хозяева, всегда на связи. Будем рекомендовать друзьям и знакомым!</p>
+                    <span class="review-author">ANY7202 · 10 августа 2026 · Яндекс Карты</span>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">Отдыхаем второй раз в этих чудесных домиках! Дома прекрасные, просторные, чистые! Внимательные и чуткие хозяева! В этом году еще и баню испробовали, пар на высшем уровне!</p>
+                    <span class="review-author">Ирина К. · 5 июня 2026 · Яндекс Карты</span>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">Прекрасное место, очень отзывчивые хозяева! Встретили, все рассказали, удобная дорога. До озера близко, поплавали на сапах ) очень классная природа!</p>
+                    <span class="review-author">Диана Г. · 7 июня 2026 · Яндекс Карты</span>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">Отличное место . Дома свежие , ухоженные , появилась банька (приятно ) . Воздух свежий , не далеко есть большой карьер. Советую !!!</p>
+                    <span class="review-author">Никита Весенний · 28 апреля 2026 · Яндекс Карты</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Где мы находимся -->
+    <section class="location" id="location">
+        <div class="container">
+            <h2 class="section-title">Где мы находимся</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem; color: var(--text-light);">
+                Ленинградская область, в 3-х минутах ходьбы от Келколовского карьера.
+            </p>
+            <div class="map-container">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=31.015931,59.791216&z=16&pt=31.015931,59.791216,pm2rdm" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Почему выбирают нас -->
+    <section class="advantages">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <div class="adv-grid">
+                <div class="adv-item">
+                    <h3>Природа и комфорт</h3>
+                    <p>Идеальное сочетание отдыха на свежем воздухе и современного домашнего комфорта.</p>
+                </div>
+                <div class="adv-item">
+                    <h3>Развлечения на любой вкус</h3>
+                    <p>Рыбалка, сапборды, лесные прогулки, ватрушки зимой, уютные вечера за просмотром фильмов и настольными играми.</p>
+                </div>
+                <div class="adv-item">
+                    <h3>Удобное расположение</h3>
+                    <p>Близко к городу — без пятничных пробок. В шаговой доступности карьер и оборудованный пляж с волейбольной сеткой.</p>
+                </div>
+                <div class="adv-item">
+                    <h3>Уединение</h3>
+                    <p>Всего 2 дома на территории комплекса. У каждого свой заезд, парковка и мангальная зона, чтобы гости не мешали друг другу.</p>
+                </div>
+                <div class="adv-item">
+                    <h3>Безопасность</h3>
+                    <p>Мы заботимся о вас: на территории комплекса ведется круглосуточное видеонаблюдение.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Наши контакты -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <h2 class="section-title">Наши контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-card">
+                    <h3>Никита</h3>
+                    <a href="tel:+79112399635" class="contact-link">+7 (911) 239-96-35</a>
+                    <a href="https://vk.ru/nikitkololo" target="_blank" class="contact-link">Написать ВКонтакте</a>
+                </div>
+                <div class="contact-card">
+                    <h3>Анастасия</h3>
+                    <a href="tel:+79213712906" class="contact-link">+7 (921) 371-29-06</a>
+                    <a href="https://vk.ru/id5797369" target="_blank" class="contact-link">Написать ВКонтакте</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Плавающая кнопка ВК -->
+    <div class="floating-vk-container" id="floatingVkContainer">
+        <div class="floating-vk-menu">
+            <a href="https://vk.ru/nikitkololo" target="_blank" class="floating-vk-item">💬 Никита в ВК</a>
+            <a href="https://vk.ru/id5797369" target="_blank" class="floating-vk-item">💬 Настя в ВК</a>
+        </div>
+        <button type="button" class="floating-vk-main-btn" id="floatingVkToggle" title="Написать нам в ВК">ВК</button>
+    </div>
+
+    <footer>
+        <div class="container">
+            <h3>Коттеджный комплекс «Два веселых гуся»</h3>
+            <p>Ждем вас в гости!</p>
+            <p style="margin-top: 15px;">
+                Мы ВКонтакте: <a href="https://vk.com/gusiloveu" target="_blank">vk.com/gusiloveu</a><br>
+                Мы в Instagram: <a href="https://www.instagram.com/dvaveselihgusia?exln=MWV0NDM0MDgycG1pZQ==" target="_blank">dvaveselihgusia</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно бронирования -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2 id="modalTitle">Бронирование</h2>
+            <form id="bookingForm">
+                <input type="hidden" id="houseInput" value="">
+                <div class="form-group">
+                    <label for="clientName">ФИО</label>
+                    <input type="text" id="clientName" required placeholder="Иванов Иван Иванович">
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Контактный телефон</label>
+                    <input type="tel" id="clientPhone" required placeholder="+7 (999) 000-00-00">
+                </div>
+                <div class="form-group">
+                    <label for="dateIn">Дата заезда</label>
+                    <input type="date" id="dateIn" required>
+                </div>
+                <div class="form-group">
+                    <label for="dateOut">Дата выезда</label>
+                    <input type="date" id="dateOut" required>
+                </div>
+                <label class="form-checkbox">
+                    <input type="checkbox" id="visitedBefore">
+                    Были ли у нас ранее?
+                </label>
+                <button type="submit" class="btn submit-btn">Забронировать через ВК</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Скрипты (анимации, калькулятор, слайдеры, бургер) -->
+    <script>
+        // --- Мобильное бургер-меню ---
+        const burgerToggle = document.getElementById('burgerToggle');
+        const navLinks = document.getElementById('navLinks');
+        burgerToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // --- Выпадающее меню плавающей кнопки ВК ---
+        const vkContainer = document.getElementById('floatingVkContainer');
+        const vkToggle = document.getElementById('floatingVkToggle');
+        vkToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            vkContainer.classList.toggle('active');
+        });
+        window.addEventListener('click', () => {
+            vkContainer.classList.remove('active');
+        });
+
+        function initSlider(sliderId) {
+            const sliderContainer = document.getElementById(sliderId);
+            if(!sliderContainer) return;
+            const wrapper = sliderContainer.querySelector('.slider-wrapper');
+            const slides = sliderContainer.querySelectorAll('.slide');
+            const prevBtn = sliderContainer.querySelector('.prev-btn');
+            const nextBtn = sliderContainer.querySelector('.next-btn');
+            const dots = sliderContainer.querySelectorAll('.dot');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            function updateSlider() {
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, index) => {
+                    if(index === currentIndex) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+            });
+        }
+
+        initSlider('slider1');
+        initSlider('slider2');
+
+        // --- КАЛЬКУЛЯТОР ---
+        let currentHouse = 'Белый гусь';
+        let currentGuests = 6;
+        let currentNights = 2;
+        let banyaHours = 0;
+        let supHours = 0;
+        let kazanDays = 0;
+        let shownTotal = 0;
+        let totalRaf = null;
+
+        const houseBtns = document.querySelectorAll('.house-switch-btn');
+        const guestBtns = document.querySelectorAll('.guest-btn');
+        const guestsLabel = document.getElementById('guests-count-label');
+        const dateInInput = document.getElementById('calc-date-in');
+        
+        const nightsVal = document.getElementById('nights-value');
+        const nightsMinus = document.getElementById('nights-minus');
+        const nightsPlus = document.getElementById('nights-plus');
+
+        const banyaVal = document.getElementById('banya-value');
+        const banyaMinus = document.getElementById('banya-minus');
+        const banyaPlus = document.getElementById('banya-plus');
+
+        const supVal = document.getElementById('sup-value');
+        const supMinus = document.getElementById('sup-minus');
+        const supPlus = document.getElementById('sup-plus');
+
+        const kazanVal = document.getElementById('kazan-value');
+        const kazanMinus = document.getElementById('kazan-minus');
+        const kazanPlus = document.getElementById('kazan-plus');
+        const summaryTitle = document.getElementById('summary-house-title');
+        const summaryDaysList = document.getElementById('summary-days-list');
+        const totalPriceEl = document.getElementById('calc-total-price');
+        const bookCalcTrigger = document.getElementById('book-calc-trigger');
+
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInInput.value = tomorrow.toISOString().split('T')[0];
+        dateInInput.min = new Date().toISOString().split('T')[0];
+
+        houseBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                houseBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentHouse = btn.getAttribute('data-house');
+                bookCalcTrigger.setAttribute('data-house', currentHouse);
+                calculate();
+            });
+        });
+
+        guestBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                guestBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentGuests = parseInt(btn.getAttribute('data-guests'));
+                guestsLabel.textContent = currentGuests;
+                calculate();
+            });
+        });
+
+        nightsMinus.addEventListener('click', () => {
+            if(currentNights > 2) {
+                currentNights--; nightsVal.textContent = currentNights;
+                if(kazanDays > currentNights) { kazanDays = currentNights; kazanVal.textContent = kazanDays; }
+                calculate();
+            }
+        });
+        nightsPlus.addEventListener('click', () => {
+            if(currentNights < 30) { currentNights++; nightsVal.textContent = currentNights; calculate(); }
+        });
+
+        banyaMinus.addEventListener('click', () => {
+            if(banyaHours > 0) { banyaHours = (banyaHours <= 3) ? 0 : banyaHours - 1; banyaVal.textContent = banyaHours; calculate(); }
+        });
+        banyaPlus.addEventListener('click', () => {
+            if(banyaHours < 12) { banyaHours = (banyaHours === 0) ? 3 : banyaHours + 1; banyaVal.textContent = banyaHours; calculate(); }
+        });
+
+        supMinus.addEventListener('click', () => {
+            if(supHours > 0) { supHours = (supHours <= 3) ? 0 : supHours - 1; supVal.textContent = supHours; calculate(); }
+        });
+        supPlus.addEventListener('click', () => {
+            if(supHours < 12) { supHours = (supHours === 0) ? 3 : supHours + 1; supVal.textContent = supHours; calculate(); }
+        });
+
+        dateInInput.addEventListener('change', calculate);
+        kazanMinus.addEventListener('click', () => {
+            if(kazanDays > 0) { kazanDays--; kazanVal.textContent = kazanDays; calculate(); }
+        });
+        kazanPlus.addEventListener('click', () => {
+            if(kazanDays < currentNights) { kazanDays++; kazanVal.textContent = kazanDays; calculate(); }
+        });
+
+        const monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+        const dayNames = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+
+        function calculate() {
+            summaryTitle.textContent = `${currentHouse} · ${currentGuests} гостей`;
+
+            let startDate = new Date(dateInInput.value || tomorrow);
+            let extraGuestFee = currentGuests > 6 ? (currentGuests - 6) * 1500 : 0;
+
+            let total = 0;
+            let htmlList = '';
+            let currentDate = new Date(startDate);
+
+            for(let i = 0; i < currentNights; i++) {
+                let dayOfWeek = currentDate.getDay();
+                let nextDate = new Date(currentDate);
+                nextDate.setDate(nextDate.getDate() + 1);
+
+                let isWeekendNight = (dayOfWeek === 5 || dayOfWeek === 6);
+                let nightPrice = (isWeekendNight ? 18000 : 11000) + extraGuestFee;
+                total += nightPrice;
+
+                let dayStr = `${currentDate.getDate()} ${monthNames[currentDate.getMonth()]} (${dayNames[dayOfWeek]})`;
+                let nextDayStr = `${nextDate.getDate()} ${monthNames[nextDate.getMonth()]} (${dayNames[nextDate.getDay()]})`;
+                let typeStr = isWeekendNight ? 'выходные' : 'будни';
+
+                htmlList += `<li class="summary-day-item"><span>${dayStr.slice(0, -5)} → ${nextDayStr.slice(0, -5)} · ${typeStr}</span><span>${nightPrice.toLocaleString('ru-RU')} ₽</span></li>`;
+                
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            if(banyaHours > 0) {
+                let banyaCost = 5000 + (banyaHours - 3) * 1000;
+                total += banyaCost;
+                htmlList += `<li class="summary-day-item"><span>Баня (${banyaHours} ч.)</span><span>${banyaCost.toLocaleString('ru-RU')} ₽</span></li>`;
+            }
+            if(supHours > 0) {
+                let supCost = 1500 + (supHours - 3) * 500;
+                total += supCost;
+                htmlList += `<li class="summary-day-item"><span>SUP-серфинг (${supHours} ч.)</span><span>${supCost.toLocaleString('ru-RU')} ₽</span></li>`;
+            }
+            if(kazanDays > 0) {
+                let kazanCost = kazanDays * 1000;
+                total += kazanCost;
+                htmlList += `<li class="summary-day-item"><span>Казан (${kazanDays} сут.)</span><span>${kazanCost.toLocaleString('ru-RU')} ₽</span></li>`;
+            }
+
+            summaryDaysList.innerHTML = htmlList;
+            Array.from(summaryDaysList.children).forEach((li, i) => { li.style.animationDelay = (Math.min(i, 10) * 0.04) + 's'; });
+            animateTotal(total);
+        }
+
+        function animateTotal(target) {
+            cancelAnimationFrame(totalRaf);
+            const from = shownTotal;
+            const show = (v) => { totalPriceEl.textContent = v.toLocaleString('ru-RU') + ' ₽'; };
+            if (from === target || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                shownTotal = target; show(target); return;
+            }
+            const start = performance.now();
+            const dur = 600;
+            totalPriceEl.classList.remove('price-pop');
+            void totalPriceEl.offsetWidth;
+            totalPriceEl.classList.add('price-pop');
+            function step(now) {
+                const t = Math.min((now - start) / dur, 1);
+                const e = 1 - Math.pow(1 - t, 3);
+                shownTotal = Math.round(from + (target - from) * e);
+                show(shownTotal);
+                if (t < 1) totalRaf = requestAnimationFrame(step);
+            }
+            totalRaf = requestAnimationFrame(step);
+        }
+
+        calculate();
+
+        // --- Модальное окно и генерация сообщения для ВК ---
+        const modal = document.getElementById('bookingModal');
+        const btns = document.querySelectorAll('.open-modal-btn');
+        const closeBtn = document.getElementById('closeModal');
+        const houseInput = document.getElementById('houseInput');
+        const modalTitle = document.getElementById('modalTitle');
+        const form = document.getElementById('bookingForm');
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const houseName = btn.getAttribute('data-house') || currentHouse;
+                houseInput.value = houseName;
+                modalTitle.textContent = 'Бронь: ' + houseName;
+                modal.classList.add('active');
+
+                document.getElementById('dateIn').value = dateInInput.value;
+                let start = new Date(dateInInput.value);
+                start.setDate(start.getDate() + currentNights);
+                document.getElementById('dateOut').value = start.toISOString().split('T')[0];
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const checkin = document.getElementById('dateIn').value;
+            const checkout = document.getElementById('dateOut').value;
+            const house = houseInput.value;
+            const visited = document.getElementById('visitedBefore').checked ? 'Да' : 'Нет';
+
+            const text = `Здравствуйте! Хочу забронировать домик.%0A` +
+                         `🏠 Дом: ${house}%0A` +
+                         `👤 Имя: ${name}%0A` +
+                         `📞 Телефон: ${phone}%0A` +
+                         `📅 Заезд: ${checkin}%0A` +
+                         `📅 Выезд: ${checkout}%0A` +
+                         `🔄 Были у нас ранее: ${visited}`;
+
+            window.open(`https://vk.me/nikitkololo?text=${text}`, '_blank');
+            modal.classList.remove('active');
+        });
+    </script>
+
+    <!-- Скрипт анимации появления при скролле и прогресс-бара -->
+    <script>
+        (function () {
+            const selectors = '.section-title, .card, .feature-cell, .amenities-items-list, .amenities-item, .amenity-photo-box, ' +
+                '.career-layout > div, .career-gallery > *, .service-card, .calc-header, .calc-layout, .calc-disclaimer, ' +
+                '.reviews-top-bar, .review-card, .map-container, .adv-item, .contact-card, footer';
+            const targets = document.querySelectorAll(selectors);
+            const groups = new Map();
+            targets.forEach(el => {
+                const key = el.parentElement;
+                const idx = groups.get(key) || 0;
+                groups.set(key, idx + 1);
+                el.style.setProperty('--d', (Math.min(idx, 7) * 0.08) + 's');
+                el.classList.add('js-reveal');
+            });
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                targets.forEach(el => io.observe(el));
+            } else {
+                targets.forEach(el => el.classList.add('in-view'));
+            }
+
+            const bar = document.createElement('div');
+            bar.id = 'scroll-progress';
+            document.body.appendChild(bar);
+            const header = document.querySelector('header');
+            function onScroll() {
+                const h = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.transform = 'scaleX(' + (h > 0 ? window.scrollY / h : 0) + ')';
+                if (header) header.classList.toggle('scrolled', window.scrollY > 10);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('.btn, .book-calc-btn, .review-link-btn, .reviews-ya-btn, .house-switch-btn, .guest-btn, .counter-btn, .floating-vk-main-btn');
+                if (!btn) return;
+                const r = btn.getBoundingClientRect();
+                const size = Math.max(r.width, r.height);
+                const s = document.createElement('span');
+                s.className = 'ripple';
+                s.style.width = s.style.height = size + 'px';
+                s.style.left = (e.clientX - r.left - size / 2) + 'px';
+                s.style.top = (e.clientY - r.top - size / 2) + 'px';
+                btn.appendChild(s);
+                setTimeout(() => s.remove(), 650);
+            });
+        })();
+    </script>
+</body>
+</html>
